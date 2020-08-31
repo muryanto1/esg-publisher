@@ -19,10 +19,10 @@ create-feedstock:
 	echo "xxx branch: $(branch)"
 	mkdir -p $(WORKDIR)/esg-publisher-feedstock;
 	$(conda_act_cmd) build-pub && \
-	cd $(WORKDIR)/esg-publisher-feedstock && $(conda) smithy ci-skeleton $(WORKDIR)/esg-publisher-feedstock;
-	mkdir -p $(WORKDIR)/esg-publisher-feedstock/recipe 
-	cp $(PWD)/recipe/meta.yaml $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
-	sed -i "$(sed_v)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
+	cd $(WORKDIR)/esg-publisher-feedstock && $(conda) smithy ci-skeleton $(WORKDIR)/esg-publisher-feedstock && \
+	mkdir -p $(WORKDIR)/esg-publisher-feedstock/recipe && \
+	cp $(PWD)/recipe/meta.yaml $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml && \
+	sed -i "$(sed_v)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml && \
 	sed -i "$(sed_b)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
 
 build:

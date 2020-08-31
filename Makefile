@@ -2,10 +2,14 @@
 branch ?= gen-five-pkg
 PWD=$(shell pwd)
 version=$(shell git describe --tags | cut -c 1-7 )
+
 conda ?= $(or $(CONDA_EXE),$(shell find /opt/*conda*/bin $(HOME)/*conda*/bin -type f -iname conda))
 conda_bin := $(patsubst %/conda,%,$(conda))
 conda_act := $(conda_bin)/activate
 conda_act_cmd := source $(conda_act)
+conda_rc := $(workdir)/condarc
+conda_cmd := CONDARC=$(conda_rc) conda
+
 sed_v = s/VERSION/$(version)/
 sed_b = s/BRANCH/$(branch)/g
 build_dir = $(shell $(conda) build --output -m .ci_support/linux_64_.yaml recipe/)
@@ -25,10 +29,14 @@ create-feedstock:
 	sed -i "$(sed_v)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml && \
 	sed -i "$(sed_b)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
 
+rerender-feedstock:
+	cd $(WORKDIR)/esg-publisher-feedstock && \
+	$(conda_act_cmd) build-pub && \
+	$(conda) smithy rerender
+
 build:
 	cd $(WORKDIR)/esg-publisher-feedstock && \
 	$(conda_act_cmd) build-pub && \
-	$(conda) smithy rerender && \
 	$(conda) build -m $(WORKDIR)/esg-publisher-feedstock/.ci_support/linux_64_.yaml $(WORKDIR)/esg-publisher-feedstock/recipe/
 	echo "$(build_dir)"
 

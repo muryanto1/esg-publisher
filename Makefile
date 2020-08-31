@@ -33,7 +33,7 @@ rerender-feedstock:
 build: setup-build create-feedstock rerender-feedstock
 	cd $(WORKDIR)/esg-publisher-feedstock && \
 	$(conda_act_cmd) build-pub && \
-	$(conda) build -m .ci_support/linux_64_.yaml recipe/
+	$(conda) build -m $(WORKDIR)/.ci_support/linux_64_.yaml recipe/
 	echo "$(build_dir)"
 
 upload:

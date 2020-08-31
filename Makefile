@@ -25,15 +25,11 @@ create-feedstock:
 	sed -i "$(sed_v)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
 	sed -i "$(sed_b)" $(WORKDIR)/esg-publisher-feedstock/recipe/meta.yaml
 
-rerender-feedstock:
+build:
 	cd $(WORKDIR)/esg-publisher-feedstock && \
 	$(conda_act_cmd) build-pub && \
-	$(conda) smithy rerender;
-
-build: setup-build create-feedstock rerender-feedstock
-	cd $(WORKDIR)/esg-publisher-feedstock && \
-	$(conda_act_cmd) build-pub && \
-	$(conda) build -m $(WORKDIR)/esg-publisher-feedstock/.ci_support/linux_64_.yaml recipe/
+	$(conda) smithy rerender && \
+	$(conda) build -m $(WORKDIR)/esg-publisher-feedstock/.ci_support/linux_64_.yaml $(WORKDIR)/esg-publisher-feedstock/recipe/
 	echo "$(build_dir)"
 
 upload:

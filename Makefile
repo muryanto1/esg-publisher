@@ -34,7 +34,7 @@ rerender-feedstock:
 	$(conda_act_cmd) build-pub && \
 	$(conda) smithy rerender
 
-build:
+build-publisher:
 	cd $(WORKDIR)/esg-publisher-feedstock && \
 	$(conda_act_cmd) build-pub && \
 	$(conda) config --add channels conda-forge && \

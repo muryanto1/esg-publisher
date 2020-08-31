@@ -37,6 +37,7 @@ rerender-feedstock:
 build:
 	cd $(WORKDIR)/esg-publisher-feedstock && \
 	$(conda_act_cmd) build-pub && \
+	$(conda) config --add channels conda-forge && \
 	$(conda) build -m $(WORKDIR)/esg-publisher-feedstock/.ci_support/linux_64_.yaml $(WORKDIR)/esg-publisher-feedstock/recipe/
 	echo "$(build_dir)"
 

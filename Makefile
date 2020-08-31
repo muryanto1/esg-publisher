@@ -12,7 +12,7 @@ build_dir = $(shell $(conda) build --output -m .ci_support/linux_64_.yaml recipe
 
 setup-build:
 	echo "...setup-build..."
-	$(conda) create -n build-pub -c conda-forge conda-build conda-smithy anaconda-client python=3.6
+	$(conda) create -n build-pub -c conda-forge conda-build conda-smithy anaconda-client
 
 create-feedstock:
 	echo "xxx version: $(version)"

@@ -12,16 +12,14 @@ build:
   script: cd pkg; python setup.py install
 
 requirements:
-  build:
-    - python
-    - setuptools
   host:
     - python
+    - setuptools
     - pip
     - libnetcdf
     - cmor
   run:
-    - python
+    - python {{ python }}
     - pip
     - libnetcdf
     - cmor

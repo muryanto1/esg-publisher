@@ -1,10 +1,10 @@
 package:
   name: esgcet
-  version: VERSION
+  version: 0.1
 
 source:
-  git_rev: BRANCH
-  git_url: https://github.com/lisi-w/esg-publisher.git
+  git_rev: update-gen-five-pkg
+  git_url: https://github.com/muryanto1/esg-publisher.git
 
 build:
   number: 0

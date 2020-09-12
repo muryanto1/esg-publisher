@@ -1,13 +1,15 @@
 package:
   name: esgcet
-  version: 0.1
+  version: VERSION
 
 source:
-  git_rev: update-gen-five-pkg
+  git_rev: BRANCH
   git_url: https://github.com/muryanto1/esg-publisher.git
-
+  # git_rev: update-gen-five-pkg
+  # git_url: https://github.com/muryanto1/esg-publisher.git
+  # path: /export/muryanto1/work/publisher/esg-publisher
 build:
-  number: 0
+  number: 1
   noarch: python
   script: cd pkg; python setup.py install
 
@@ -17,11 +19,14 @@ requirements:
     - setuptools
     - pip
     - libnetcdf
+    - libnetcdf * nompi_*
     - cmor
   run:
-    - python {{ python }}
+    - python
     - pip
     - libnetcdf
+    - libnetcdf * nompi_*
+    - requests
     - cmor
 
 test:
